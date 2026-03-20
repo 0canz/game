@@ -32,7 +32,7 @@ public class FPSController : MonoBehaviour
         #region Handles Movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-
+''
         #endregion
 
         #region Handles Jumping
