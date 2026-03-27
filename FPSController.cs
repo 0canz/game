@@ -33,6 +33,12 @@ public class FPSController : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         
+         // Calculate movement direction based on input and speed
+         float curSpeedX = canMove ? walkSpeed * Input.GetAxis("Vertical ") : 0;
+         float curSpeedY = moveDirection.y;
+         float curSpeedZ = canMove ? walkSpeed * Input.GetAxis("Horizontal") : 0;
+         moveDirection = (forwand * curSpeedX) + (right * curSpeedZ);
+        moveDirection.y = curSpeedY;
         #endregion
 
         #region Handles Jumping
