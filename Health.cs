@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     [Header("UI")]
-    public Slider healthSlider;     // Assign your HealthBar Slider here
+    public Slider healthSlider;
 
     void Start()
     {
