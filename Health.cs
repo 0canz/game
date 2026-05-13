@@ -1,30 +1,48 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
+    [Header("Health Settings")]
     public float maxHealth = 100f;
-    public float minHealth = 0f;
-    public float currentHealthPercentage => currentHealth / maxHealth;
-    private float currentHealth;
+    public float currentHealth;
 
-    private void Start()
+    [Header("UI")]
+    public Slider healthSlider;     // Assign your HealthBar Slider here
+
+    void Start()
     {
         currentHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
     }
 
-    public void TakeDamage(float damageAmount)
+    // Call this whenever player takes damage
+    public void TakeDamage(float damage)
     {
-        currentHealth -= damageAmount;
-        currentHealth = Mathf.Clamp(currentHealth, minHealth, maxHealth);
-        Debug.Log($"Took {damageAmount} damage. Current health: {currentHealth}");
-    }
-    private void Update()
-    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHealthBar();
+        
         if (currentHealth <= 0)
-        {
-            Debug.Log("you are ass lil bro");
-        }
+            Die();
     }
 
+    // Call this to heal
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateHealthBar();
+    }
 
+    void UpdateHealthBar()
+    {
+        healthSlider.value = currentHealth;
+    }
+
+    void Die()
+    {
+        Debug.Log("You Died");
+    }
 }
